@@ -12,6 +12,7 @@
 
 - LZ78
 - Huffman-koodaus
+  TODO?
 
 ## Minkä ongelman ratkaisen
 
@@ -21,9 +22,19 @@
 
 - Tekstitiedoston
 
+## Aikavaatimukset ja tilavaativuudet
+
+TODO
+
+## Lähteitä
+
+TODO
+
 # HARJOITUSTYÖN YDIN
 
 Harjoitustyön ytimenä on toteuttaa tekstitiedostojen tehokkaita pakkausalgoritmeja, ja pakata teksitiedostoja käyttäen niitä.
+
+TODO? (Miten vertailen algoritmeja?)
 
 ## Koulutusohjelma
 

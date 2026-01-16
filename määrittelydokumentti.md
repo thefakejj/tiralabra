@@ -2,8 +2,6 @@
 
 ## Ohjelmointikieli
 
-viikko1
-
 - Käytän Pythonia
 
 ## Muut kielet mitä hallitsen
@@ -25,7 +23,10 @@ viikko1
 
 ## Aikavaatimukset ja tilavaativuudet
 
-TODO
+Huffman:
+
+aika: O(nlogn)
+tila: O(n)
 
 ## Lähteitä
 

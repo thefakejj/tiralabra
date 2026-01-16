@@ -25,8 +25,8 @@
 
 Huffman:
 
-aika: O(nlogn)
-tila: O(n)
+- aika: O(nlogn)
+- tila: O(n)
 
 ## Lähteitä
 

@@ -2,6 +2,8 @@
 
 ## Ohjelmointikieli
 
+viikko1
+
 - Käytän Pythonia
 
 ## Muut kielet mitä hallitsen
@@ -32,9 +34,7 @@ TODO
 
 # HARJOITUSTYÖN YDIN
 
-Harjoitustyön ytimenä on toteuttaa tekstitiedostojen tehokkaita pakkausalgoritmeja, ja pakata teksitiedostoja käyttäen niitä.
-
-TODO? (Miten vertailen algoritmeja?)
+Harjoitustyön ytimenä on toteuttaa tekstitiedostojen tehokkaita pakkausalgoritmeja, ja pakata teksitiedostoja käyttäen niitä. Tarkoituksena on myös verrata algoritmien pakkaustehoja keskenään.
 
 ## Koulutusohjelma
 

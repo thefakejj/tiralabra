@@ -14,7 +14,6 @@ viikko1
 
 - LZ78
 - Huffman-koodaus
-  TODO?
 
 ## Minkä ongelman ratkaisen
 
@@ -30,7 +29,13 @@ TODO
 
 ## Lähteitä
 
-TODO
+https://en.wikipedia.org/wiki/LZ77_and_LZ78#LZ78
+https://www.geeksforgeeks.org/dsa/huffman-coding-greedy-algo-3/
+
+
+Näistä videoista oli paljon hyötyä
+LZ78: https://youtu.be/LPFtaEy3gMA?si=iU_l7fVOBkX7MU5C
+Huffman: https://youtu.be/iEm1NRyEe5c?si=kFAwrlcMHp3XEP2L
 
 # HARJOITUSTYÖN YDIN
 

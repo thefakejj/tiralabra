@@ -23,18 +23,25 @@
 
 ## Aikavaatimukset ja tilavaativuudet
 
+LZ78:
+
+- aika: O(n) (Olettaen että hashmapissa haku on O(1))
+- tila: O(n)
+
 Huffman:
 
-- aika: O(nlogn)
+- aika: O(nlogn) (priority queueen lisääminen vaatii logn aikaa)
 - tila: O(n)
 
 ## Lähteitä
 
 - https://en.wikipedia.org/wiki/LZ77_and_LZ78#LZ78
-- https://www.geeksforgeeks.org/dsa/huffman-coding-greedy-algo-3/
 
+- https://www.geeksforgeeks.org/dsa/huffman-coding-greedy-algo-3/
+- https://en.wikipedia.org/wiki/Huffman_coding
 
 Näistä videoista oli paljon hyötyä
+
 - LZ78: https://youtu.be/LPFtaEy3gMA?si=iU_l7fVOBkX7MU5C
 - Huffman: https://youtu.be/iEm1NRyEe5c?si=kFAwrlcMHp3XEP2L
 

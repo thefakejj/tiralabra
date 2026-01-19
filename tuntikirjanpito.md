@@ -7,3 +7,4 @@
 | 15.1  | 4    | ohjeiden lukua, tutustumista algoritmeihin, määrittelydokkarin kirjoittamista, poetry lisätty |
 | 16.1  | 4    | lisää tutustumista algoritmeihin ja määrittelydokkarin täyttämistä                            |
 | 17.1  | 4.5  | AIKAVAATIVUUDET MEGA MOVIE                                                                    |
+| 19.1  | 6    | Huffman-koodauksen toteutus alkuun                                                            |

@@ -47,33 +47,40 @@ def create_tree(freq_table: dict):
     return root
 
 # rekursiivinen funktio jolla muodostetaan puun lehdille huffman-koodit
-def set_huffman_codes(node, codes: list, current: str):
+def set_huffman_codes(node, codes: dict, current: str, chars: dict):
 
     if node is None:
         return
     
     if node.left is None and node.right is None:
-        codes.append(current)
-        node.add_huff_code(current)
+        #codes.append(current)
+        #node.add_huff_code(current)
+        codes[node.char] = current
+        chars[current] = node.char
         return
 
-    set_huffman_codes(node.left, codes, current+"0")
-    set_huffman_codes(node.right, codes, current+"1")
+    set_huffman_codes(node.left, codes, current+"0", chars)
+    set_huffman_codes(node.right, codes, current+"1", chars)
 
-def huffman_codes_to_characters_connection(root, freq_table: dict):
-    codes = []
-    set_huffman_codes(root, codes, "")
-    huff_codes = {}
-    char_i = 0
-    bfs(root)
-    # for char in freq_table.keys():
-    #     huff_codes[char] = codes[char_i]
-    #     char_i += 1
-    # print(huff_codes)
-   # return huff_codes
+def huffman_codes_to_characters_connection(root):
+    codes = {}
+    chars = {}
+    set_huffman_codes(root, codes, "", chars)
+    return codes, chars
 
+def create_huffman_string(text: str, codes: dict):
+    output = ""
+    codelist = []
+    for char in text:
+        output+=codes[char]
+        codelist.append(codes[char])
+    return output, codelist
 
-
+def codelist_to_text(codelist: list, chars: dict):
+    output = ""
+    for code in codelist:
+        output+= chars[code]
+    return output
 
 
 

@@ -1,6 +1,6 @@
 from huffman import codelist_to_text, create_huffman_string, create_freq_table, create_tree, huffman_codes_to_characters_connection
 
-from lz import lz
+from lz import lz, text_from_tokens
 
 def get_text_from_file(path):
     with open(path) as f:
@@ -8,13 +8,19 @@ def get_text_from_file(path):
 
 if __name__ in "__main__":
 
-    funnytext = "ABRACADABRARABARABARA"
-    lz_dict = lz(funnytext)
-    print(lz_dict)
+    # funnytext = "AAAAAAAAABCAAAAAAA"
+    # lz_dict = lz(funnytext)
+    # print(lz_dict)
 
-    funnytext = "ABRACADABRARABAREABARAE"
-    lz_dict = lz(funnytext)
-    print(lz_dict)
+    funnytext = "ABRACADABRARABARABARA"
+    lz_table = lz(funnytext)
+    print(lz_table)
+    # print(text_from_tokens(lz_table))
+
+
+    # funnytext = "ABRACADABRARABAREABARAE"
+    # lz_dict = lz(funnytext)
+    # print(lz_dict)
 
     # HUFFMAN
     #filetext = get_text_from_file("./src/sampletexts/johndoe.txt")

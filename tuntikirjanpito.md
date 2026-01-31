@@ -10,3 +10,6 @@
 | 19.1  | 6    | Huffman-koodauksen toteutus alkuun                                                            |
 | 20.1  | 4    | Eka Huffman-algo valmiina bittimuotoa vailla. LZ78 alkuun.                                    |
 | 24.1  | 1    | Viikkoraportti 2                                                                              |
+| 29.1  | 2    | Opiskelin LZ78:aa lisää                                                                       |
+| 30.1  | 4    | Lisää LZ78:n opiskelua ja LZ78 enkoodaus valmiina bittimuotoa vailla                          |
+| 31.1  | 1    | viikkoraportti 3                                                                              |

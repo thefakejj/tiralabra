@@ -49,73 +49,27 @@ def lz(text: str):
 #             current += pair[1]
 #     return current
 
-# def bfs(root, ):
-#     visited = set()
-#     queue = [root]
-#     while len(queue)>0:
-#         current = queue[0]
-#         if current not in visited and not None:
-#             for child in current.children:
-#                 if child != None:
-#                     queue.append(child)
-#             visited.add(current)
-#             queue.remove(current)
-#         #print(current.freq)
-#         #trying huff code attribute for leaves
-#         if current.children.keys() == None:
-#             print(current.char, current.code, current.freq)   
+def text_from_tokens(table: list, pair, current = ""):
+    if pair[0] != 0:
+        current += text_from_tokens(table, table[pair[0]], current)
+    current += pair[1]
+    return current
 
 
-# def lz(text: str):
-#     existing_tokens = set()
-#     tokens = [None]
-#     codes = dict()
+    # for pair in table:
 
-#     current = ""
-#     codes[0] = ""
-#     prev_index = 0
-#     index = 1
-#     pair = (0, "")
-#     for char in text:
-#         current += char
-#         if len(current) == 1:
-#             pair = (prev_index, current)
-#         if current not in existing_tokens:
-#             existing_tokens.add(current)
-#             codes[current] = index
-#             index += 1
-#             current = ""
-#             continue
-#         index_string = str(codes[current])
-#         current = index_string
-    
-#     current+="EOF"
-#     codes[current] = index
+    #     if pair != None:
+    #         prev_index = pair[0]
+            
+    #         if prev_index != 0:
+    #             text_from_tokens(table, prev_index)
+    #         current += pair[1]
 
-#     return codes
+    # return current
 
-
-
-# def lz(text: str):
-#     existing_tokens = set()
-#     tokens = [None]
-#     indices = dict()
-
-#     current = ""
-#     index = 1
-#     indices[""] = 0
-#     prev_index = 0
-#     for char in text:
-#         current += char
-#         if current not in indices:
-#             indices[current] = index
-#             index += 1
-#             current = ""
-#             continue
-#         index_string = str(indices[current])
-#         current = index_string
-    
-#     current+="EOF"
-#     indices[current] = index
-
-#     return indices
+def init_decode(table: list):
+    result = ""
+    for pair in table:
+        if pair != None:
+            result += text_from_tokens(table, pair)
+    return result

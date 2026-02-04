@@ -1,6 +1,6 @@
 from huffman import codelist_to_text, create_huffman_string, create_freq_table, create_tree, huffman_codes_to_characters_connection
 
-from lz import lz, text_from_tokens
+from lz import lz, text_from_tokens, init_decode
 
 def get_text_from_file(path):
     with open(path) as f:
@@ -15,7 +15,7 @@ if __name__ in "__main__":
     funnytext = "ABRACADABRARABARABARA"
     lz_table = lz(funnytext)
     print(lz_table)
-    # print(text_from_tokens(lz_table))
+    print(init_decode(lz_table))
 
 
     # funnytext = "ABRACADABRARABAREABARAE"

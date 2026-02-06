@@ -69,18 +69,43 @@ def huffman_codes_to_characters_connection(root):
     return codes, chars
 
 def create_huffman_string(text: str, codes: dict):
-    output = b""
+    #output = b""
     codelist = []
     for char in text:
-        output+=codes[char]
+        #output+=codes[char]
         codelist.append(codes[char])
-    return output, codelist
+    return codelist #output, codelist
+
+def save_codelist_to_file(filepath: str, codes: list):
+    with open(filepath, "wb") as binfile:
+        for code in codes:
+            binfile.write(code)
+
+def get_codelist_from_file(filepath: str):
+    with open(filepath, "rb") as binfile:
+        binary = binfile.read()
+    return binary
 
 def codelist_to_text(codelist: list, chars: dict):
     output = ""
     for code in codelist:
         output+= chars[code]
     return output
+
+def binary_to_text(binary, chars: dict):
+    output = ""
+    current = b""
+    start_index = 0
+    for i in range(1, len(binary)+1):
+        current = binary[start_index:i]
+        character = chars.get(current, None)
+        if character == None:
+            continue
+        output += character
+        start_index = i
+        current = b""
+    return output
+
 
 
 

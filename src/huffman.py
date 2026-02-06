@@ -59,24 +59,25 @@ def set_huffman_codes(node, codes: dict, current, chars: dict):
         chars[current] = node.char
         return
 
-    set_huffman_codes(node.left, codes, current+b"0", chars)
-    set_huffman_codes(node.right, codes, current+b"1", chars)
+    set_huffman_codes(node.left, codes, current+"0", chars)
+    set_huffman_codes(node.right, codes, current+"1", chars)
 
 def huffman_codes_to_characters_connection(root):
     codes = {}
     chars = {}
-    set_huffman_codes(root, codes, b"", chars)
+    set_huffman_codes(root, codes, "", chars)
     return codes, chars
 
 def create_huffman_string(text: str, codes: dict):
-    #output = b""
+    output = ""
     codelist = []
     for char in text:
-        #output+=codes[char]
+        output+=codes[char]
         codelist.append(codes[char])
-    return codelist #output, codelist
+    return output, codelist
 
 def save_codelist_to_file(filepath: str, codes: list):
+    return
     with open(filepath, "wb") as binfile:
         for code in codes:
             binfile.write(code)
@@ -106,12 +107,39 @@ def binary_to_text(binary, chars: dict):
         current = b""
     return output
 
+def bytes_to_text(bytes, chars: dict):
+    huffman_string = ""
+    for byte in bytes:
+        huffman_string += format(byte, "b")
+    length = len(huffman_string)
+    # huffman_string = huffman_string[0:length]
+    print(huffman_string)
+    output = ""
+    current = ""
+    start_index = 0
+    for i in range(1, len(huffman_string)+1):
+        current = huffman_string[start_index:i]
+        character = chars.get(current, None)
+        if character == None:
+            continue
+        output += character
+        start_index = i
+        current = ""
+    return output
+    return current
 
+def huffman_string_to_binary_file(huffman_string: str, filepath):
+    missing_bits = 8 - len(huffman_string) % 8
+    padding = "0"*missing_bits
+    huffman_string += padding
 
+    bytes = bytearray()
+    for i in range(0, len(huffman_string), 8):
+        byte = huffman_string[i:i+8]
+        bytes.append(int(byte, 2))
 
-
-
-
+    with open(filepath, "wb") as binfile:
+        binfile.write(bytes)
 
 
 def bfs(root):

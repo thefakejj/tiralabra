@@ -14,3 +14,5 @@
 | 30.1  | 4    | Lisää LZ78:n opiskelua ja LZ78 enkoodaus valmiina bittimuotoa vailla                          |
 | 31.1  | 1    | viikkoraportti 3                                                                              |
 |  4.2  | 4    | LZ78 dekoodaus väärin ja sen korjausta. kattelin vähän bittien tallennusta                    |
+|  5.2  | 1    | Tutkin mitä teen Huffmanin kanssa                                                             |
+|  6.2  | 7    | Huffman hylkäsi minut (yritetty löytää tapoja tallentaa bitit tiedostoon)                     |

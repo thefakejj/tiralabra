@@ -47,7 +47,7 @@ def create_tree(freq_table: dict):
     return root
 
 # rekursiivinen funktio jolla muodostetaan puun lehdille huffman-koodit
-def set_huffman_codes(node, codes: dict, current: str, chars: dict):
+def set_huffman_codes(node, codes: dict, current, chars: dict):
 
     if node is None:
         return
@@ -59,17 +59,17 @@ def set_huffman_codes(node, codes: dict, current: str, chars: dict):
         chars[current] = node.char
         return
 
-    set_huffman_codes(node.left, codes, current+"0", chars)
-    set_huffman_codes(node.right, codes, current+"1", chars)
+    set_huffman_codes(node.left, codes, current+b"0", chars)
+    set_huffman_codes(node.right, codes, current+b"1", chars)
 
 def huffman_codes_to_characters_connection(root):
     codes = {}
     chars = {}
-    set_huffman_codes(root, codes, "", chars)
+    set_huffman_codes(root, codes, b"", chars)
     return codes, chars
 
 def create_huffman_string(text: str, codes: dict):
-    output = ""
+    output = b""
     codelist = []
     for char in text:
         output+=codes[char]

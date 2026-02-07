@@ -16,3 +16,4 @@
 |  4.2  | 4    | LZ78 dekoodaus väärin ja sen korjausta. kattelin vähän bittien tallennusta                    |
 |  5.2  | 1    | Tutkin mitä teen Huffmanin kanssa                                                             |
 |  6.2  | 7    | Huffman hylkäsi minut (yritetty löytää tapoja tallentaa bitit tiedostoon)                     |
+|  7.2  | 1    | Viikkoraportti 4                                                                              |

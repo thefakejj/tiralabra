@@ -17,3 +17,5 @@
 |  5.2  | 1    | Tutkin mitä teen Huffmanin kanssa                                                             |
 |  6.2  | 7    | Huffman hylkäsi minut (yritetty löytää tapoja tallentaa bitit tiedostoon)                     |
 |  7.2  | 1    | Viikkoraportti 4                                                                              |
+| 10.2  | 1    | Vertaisarviointi (miten tämä ohjelma saadaan pyörimään)                                       |
+| 11.2  | 5    | Vertaisarviointi purkkiin                                                                     |

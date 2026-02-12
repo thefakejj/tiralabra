@@ -14,7 +14,7 @@ def compare_file_size(og_path, bin_path):
     print(f"Original file size: {og_size}\nBinary file size: {bin_size}")
 
 if __name__ in "__main__":
-    og_path = "./src/sampletexts/johndoe.txt"
+    og_path = "./src/sampletexts/hamlet.txt"
     filetext = get_text_from_file(og_path)
     #binaryfile = open("binfile.bin", "wb")
     
@@ -44,9 +44,9 @@ if __name__ in "__main__":
 
     huffman_string_to_binary_file(output_string, bin_path)
 
-    bindata = get_codelist_from_file(bin_path)
-    og_text = bytes_to_text(bindata, chars)
-    print(og_text)
+    # bindata = get_codelist_from_file(bin_path)
+    # og_text = bytes_to_text(bindata, chars)
+    # print(og_text)
 
 
     #original_text = codelist_to_text(codelist, chars)

@@ -53,8 +53,6 @@ def set_huffman_codes(node, codes: dict, current, chars: dict):
         return
     
     if node.left is None and node.right is None:
-        #codes.append(current)
-        #node.add_huff_code(current)
         codes[node.char] = current
         chars[current] = node.char
         return
@@ -76,13 +74,7 @@ def create_huffman_string(text: str, codes: dict):
         codelist.append(codes[char])
     return output, codelist
 
-def save_codelist_to_file(filepath: str, codes: list):
-    return
-    with open(filepath, "wb") as binfile:
-        for code in codes:
-            binfile.write(code)
-
-def get_codelist_from_file(filepath: str):
+def get_bytes_from_binfile(filepath: str):
     with open(filepath, "rb") as binfile:
         binary = binfile.read()
     return binary
@@ -93,54 +85,44 @@ def codelist_to_text(codelist: list, chars: dict):
         output+= chars[code]
     return output
 
-def binary_to_text(binary, chars: dict):
-    output = ""
-    current = b""
-    start_index = 0
-    for i in range(1, len(binary)+1):
-        current = binary[start_index:i]
-        character = chars.get(current, None)
-        if character == None:
-            continue
-        output += character
-        start_index = i
-        current = b""
-    return output
-
 def bytes_to_text(bytes, chars: dict):
-    huffman_string = ""
-    for byte in bytes:
-        huffman_string += format(byte, "b")
-    length = len(huffman_string)
-    # huffman_string = huffman_string[0:length]
-    print(huffman_string)
-    output = ""
+    bits = ""
+    detected_padding = bytes[0]
+    for i in range(1, len(bytes)):
+        byte = bytes[i]
+        byte = format(byte, "b")
+        missing_bits = (8 - len(byte)) % 8
+        padding = "0"*missing_bits
+        byte = padding+byte
+        bits += byte
+    end_index = len(bits) - detected_padding
+    bits = bits[0:end_index]
+
     current = ""
-    start_index = 0
-    for i in range(1, len(huffman_string)+1):
-        current = huffman_string[start_index:i]
+    output = ""
+    for bit in bits:
+        current += bit
         character = chars.get(current, None)
         if character == None:
             continue
         output += character
-        start_index = i
         current = ""
+   
     return output
-    return current
 
 def huffman_string_to_binary_file(huffman_string: str, filepath):
-    missing_bits = 8 - len(huffman_string) % 8
+    missing_bits = (8 - len(huffman_string)) % 8
     padding = "0"*missing_bits
     huffman_string += padding
 
     bytes = bytearray()
+    bytes.append(missing_bits)
     for i in range(0, len(huffman_string), 8):
         byte = huffman_string[i:i+8]
         bytes.append(int(byte, 2))
 
     with open(filepath, "wb") as binfile:
         binfile.write(bytes)
-
 
 def bfs(root):
     visited = set()

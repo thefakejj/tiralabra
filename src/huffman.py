@@ -6,7 +6,6 @@ class Node:
     def __init__(self, freq: int, char=None):
         self.freq = freq
         self.char = char
-        self.code = None
         self.left = None
         self.right = None
 
@@ -91,9 +90,7 @@ def bytes_to_text(bytes, chars: dict):
     for i in range(1, len(bytes)):
         byte = bytes[i]
         byte = format(byte, "b")
-        missing_bits = (8 - len(byte)) % 8
-        padding = "0"*missing_bits
-        byte = padding+byte
+        byte = left_pad_byte(byte)
         bits += byte
     end_index = len(bits) - detected_padding
     bits = bits[0:end_index]
@@ -124,6 +121,68 @@ def huffman_string_to_binary_file(huffman_string: str, filepath):
     with open(filepath, "wb") as binfile:
         binfile.write(bytes)
 
+def tree_to_binary_string(root: Node):
+    node = root
+    bits = ""
+    stack = [node]
+    while len(stack) > 0:
+        node = stack.pop()
+        if node.left == None and node.right == None:
+            bits += "1"
+            char = node.char
+            char_ascii = ord(char)
+            char_ascii = format(char_ascii, "b")
+            char_ascii = left_pad_byte(char_ascii)
+            bits += char_ascii
+        else:
+            bits += "0"
+            stack.append(node.right)
+            stack.append(node.left)
+
+    return bits
+
+def binary_string_to_tree(bits: str):
+    i = 0
+    root = Node(1)
+    stack = [root] #freq ei väliä, char lisätään myöhemmin. 1 on placeholder freq.
+    while i < len(bits):
+        print("i", i)
+        print("bits", bits[i])
+        node = stack.pop()
+        if bits[i] == "1":
+            char = bits[i+1:i+9]
+            char = int(char, 2)
+            char = chr(char)
+            i = i+9
+            node.char = char
+        elif bits[i] == "0":
+            left = Node(1)
+            right = Node(1)
+
+            node.left = left
+            node.right = right
+
+            stack.append(right)
+            stack.append(left)
+            i += 1
+    return root
+
+
+# def decode_create_node(char_ascii: str):
+
+            
+#     # To read, do this:
+
+#     # Read bit. If 1, then read N-bit character/byte, return new node around it with no children
+#     # If bit was 0, decode left and right child-nodes the same way, and return new node around them with those children, but no value
+
+
+def left_pad_byte(byte: str):
+        missing_bits = (8 - len(byte)) % 8
+        padding = "0"*missing_bits
+        byte = padding+byte
+        return byte
+
 def bfs(root):
     visited = set()
     queue = [root]
@@ -138,4 +197,4 @@ def bfs(root):
         #print(current.freq)
         #trying huff code attribute for leaves
         if current.left is None and current.right is None:
-            print(current.char, current.code, current.freq)
+            print(current.char, current.freq)

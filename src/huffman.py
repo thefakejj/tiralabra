@@ -67,11 +67,9 @@ def huffman_codes_to_characters_connection(root):
 
 def create_huffman_string(text: str, codes: dict):
     output = ""
-    codelist = []
     for char in text:
         output+=codes[char]
-        codelist.append(codes[char])
-    return output, codelist
+    return output
 
 def get_bytes_from_binfile(filepath: str):
     with open(filepath, "rb") as binfile:
@@ -84,7 +82,7 @@ def codelist_to_text(codelist: list, chars: dict):
         output+= chars[code]
     return output
 
-def bytes_to_text(bytes, chars: dict):
+def bytes_to_text(bytes):
     bits = ""
     detected_padding = bytes[0]
     for i in range(1, len(bytes)):
@@ -93,7 +91,14 @@ def bytes_to_text(bytes, chars: dict):
         byte = left_pad_byte(byte)
         bits += byte
     end_index = len(bits) - detected_padding
-    bits = bits[0:end_index]
+    bits = bits[0:end_index] # string bits should include all binary starting from tree
+
+    data = binary_string_to_tree(bits)
+    tree = data["tree"]
+    start_index = data["index"]
+    
+    bits = bits[start_index:end_index] # string bits should include all binary starting from compressed data
+    chars = huffman_codes_to_characters_connection(tree)[1] # this method returns two dicts, we need chars
 
     current = ""
     output = ""
@@ -107,15 +112,16 @@ def bytes_to_text(bytes, chars: dict):
    
     return output
 
-def huffman_string_to_binary_file(huffman_string: str, filepath):
-    missing_bits = (8 - len(huffman_string)) % 8
+def huffman_string_to_binary_file(huffman_tree: str, huffman_string: str, filepath):
+    binary_data = huffman_tree + huffman_string
+    missing_bits = (8 - len(binary_data)) % 8
     padding = "0"*missing_bits
-    huffman_string += padding
+    binary_data += padding
 
     bytes = bytearray()
     bytes.append(missing_bits)
-    for i in range(0, len(huffman_string), 8):
-        byte = huffman_string[i:i+8]
+    for i in range(0, len(binary_data), 8):
+        byte = binary_data[i:i+8]
         bytes.append(int(byte, 2))
 
     with open(filepath, "wb") as binfile:
@@ -145,9 +151,9 @@ def binary_string_to_tree(bits: str):
     i = 0
     root = Node(1)
     stack = [root] #freq ei väliä, char lisätään myöhemmin. 1 on placeholder freq.
-    while i < len(bits):
-        print("i", i)
-        print("bits", bits[i])
+    while True:
+        if len(stack) < 1:
+            break
         node = stack.pop()
         if bits[i] == "1":
             char = bits[i+1:i+9]
@@ -165,17 +171,8 @@ def binary_string_to_tree(bits: str):
             stack.append(right)
             stack.append(left)
             i += 1
-    return root
-
-
-# def decode_create_node(char_ascii: str):
-
-            
-#     # To read, do this:
-
-#     # Read bit. If 1, then read N-bit character/byte, return new node around it with no children
-#     # If bit was 0, decode left and right child-nodes the same way, and return new node around them with those children, but no value
-
+    data = {"tree": root, "index": i}
+    return data
 
 def left_pad_byte(byte: str):
         missing_bits = (8 - len(byte)) % 8
@@ -183,6 +180,7 @@ def left_pad_byte(byte: str):
         byte = padding+byte
         return byte
 
+# helper funciton to check trees
 def bfs(root):
     visited = set()
     queue = [root]
@@ -194,7 +192,5 @@ def bfs(root):
                     queue.append(child)
             visited.add(current)
             queue.remove(current)
-        #print(current.freq)
-        #trying huff code attribute for leaves
         if current.left is None and current.right is None:
             print(current.char, current.freq)

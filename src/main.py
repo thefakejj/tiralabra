@@ -14,10 +14,9 @@ def compare_file_size(og_path, bin_path):
     print(f"Original file size: {og_size}\nBinary file size: {bin_size}")
 
 if __name__ in "__main__":
-    og_path = "./src/sampletexts/aabcbad.txt"
+    og_path = "./src/sampletexts/johndoe.txt"
     filetext = get_text_from_file(og_path)
-    print(filetext)
-    
+
     # funnytext = "ABRACADABRARABARABARA"
     # lz_table = lz(funnytext)
     # print(lz_table)
@@ -25,30 +24,18 @@ if __name__ in "__main__":
 
     # # HUFFMAN
     freq_table = create_freq_table(filetext)
-    print(freq_table)
     tree = create_tree(freq_table)
-    bfs(tree)
-    huffman_codes, chars = huffman_codes_to_characters_connection(tree)
-    output_string, codelist = create_huffman_string(filetext, huffman_codes)
-    print(huffman_codes)
-    print(output_string)
+    huffman_codes = huffman_codes_to_characters_connection(tree) [0]
+    output_string = create_huffman_string(filetext, huffman_codes)
 
     tree_in_bits = tree_to_binary_string(tree)
-    print(type(tree_in_bits))
-    print(tree_in_bits)
-    print(len(tree_in_bits))
-
-    decoded_tree = binary_string_to_tree(tree_in_bits)
-    bfs(decoded_tree)
-
-
 
     bin_path = "./binfile.bin"
 
-    huffman_string_to_binary_file(output_string, bin_path)
+    huffman_string_to_binary_file(tree_in_bits, output_string, bin_path)
     compare_file_size(og_path, bin_path)
 
     bindata = get_bytes_from_binfile(bin_path)
 
-    og_text = bytes_to_text(bindata, chars)
+    og_text = bytes_to_text(bindata)
     print(og_text)

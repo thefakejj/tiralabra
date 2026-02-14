@@ -21,3 +21,4 @@
 | 11.2  | 5    | Vertaisarviointi purkkiin                                                                     |
 | 12.2  | 3    | Huffman                                                                                       |
 | 13.2  | 5    | Huffman                                                                                       |
+| 14.2  | 1    | Viikkoraportti 5                                                                              |

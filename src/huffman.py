@@ -73,8 +73,8 @@ def create_huffman_string(text: str, codes: dict):
 
 def get_bytes_from_binfile(filepath: str):
     with open(filepath, "rb") as binfile:
-        binary = binfile.read()
-    return binary
+        bytes = binfile.read()
+    return bytes
 
 def codelist_to_text(codelist: list, chars: dict):
     output = ""
@@ -82,7 +82,7 @@ def codelist_to_text(codelist: list, chars: dict):
         output+= chars[code]
     return output
 
-def bytes_to_text(bytes):
+def bytes_to_text(bytes: list):
     bits = ""
     detected_padding = bytes[0]
     for i in range(1, len(bytes)):
@@ -112,7 +112,7 @@ def bytes_to_text(bytes):
    
     return output
 
-def huffman_string_to_binary_file(huffman_tree: str, huffman_string: str, filepath):
+def huffman_string_to_binary_file(huffman_tree: str, huffman_string: str, filepath: str):
     binary_data = huffman_tree + huffman_string
     missing_bits = (8 - len(binary_data)) % 8
     padding = "0"*missing_bits

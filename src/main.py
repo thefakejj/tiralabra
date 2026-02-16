@@ -1,6 +1,6 @@
 from huffman import binary_string_to_tree, tree_to_binary_string, bfs, bytes_to_text, huffman_string_to_binary_file, get_bytes_from_binfile, create_huffman_string, create_freq_table, create_tree, huffman_codes_to_characters_connection
 
-from lz import lz_binary_to_bytes, bytes_to_bits, lz_bits_to_table, lz_binary_to_file, lz_to_binary_string, lz
+from lz import lz_decode, lz_binary_to_bytes, bytes_to_bits, lz_bits_to_table, lz_binary_to_file, lz_to_binary_string, lz
 
 import os
 
@@ -15,7 +15,7 @@ def compare_file_size(og_path, bin_path):
 
 if __name__ in "__main__":
 
-    og_path = "./src/sampletexts/aabcbad.txt"
+    og_path = "./src/sampletexts/johndoe.txt"
     filetext = get_text_from_file(og_path)
 
     # funnytext = "ABRACADABRARABARABARA"
@@ -23,7 +23,7 @@ if __name__ in "__main__":
     # print(lz_table)
 
     lz_table = lz(filetext)
-    print(lz_table)
+    #print(lz_table)
 
     bin_path = "./binfile.bin"
     
@@ -39,8 +39,12 @@ if __name__ in "__main__":
     lz_bits = bytes_to_bits(lz_bytes)
 
     new_lz_table = lz_bits_to_table(lz_bits)
-
-    print(new_lz_table)
+    #print(new_lz_table)
+    print("tables same:", lz_table==new_lz_table)
+    
+    lz_decoded = lz_decode(new_lz_table)
+    #print(lz_decoded)
+    print(f"text matches: {filetext==lz_decoded}")
 
 
     # filetext = get_text_from_file(og_path)

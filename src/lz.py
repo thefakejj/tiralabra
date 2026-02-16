@@ -1,3 +1,22 @@
+# def init_decode(table: list):
+#     result = ""
+#     for pair in table:
+#         if pair == None:
+#             continue
+#         if pair[0] != 0:
+#             iter = pair
+#             stack = []
+#             while iter[0] != 0:
+#                 stack.append(iter[1])
+#                 iter = table[iter[0]]
+#             stack.append(pair[1])
+#             while len(stack) > 0:
+#                 result += stack.pop()
+#             continue
+#         result += pair[1]
+#     return result
+
+
 class Node:
     def __init__(self, index: int):
         self.index = index
@@ -24,7 +43,7 @@ class Node:
 def lz(text: str):
     # table is a list of (index, character), where index refers to intex of correct coding in this table and character is a new character
     # starts with empty node
-    table = [None]
+    table = [(None, "")]
     trie_root = Node(0)
 
     current = ""
@@ -97,7 +116,7 @@ def bytes_to_bits(bytes: list):
     return bits
 
 def lz_bits_to_table(bits: str):
-    table = [None]
+    table = [(None, "")]
     # we want to first read 12 bits, which gives us a reference
     # then we want to read 8 bits, which gives the character's acsii code
     # True if currently reading reference
@@ -106,7 +125,7 @@ def lz_bits_to_table(bits: str):
         end = i+20
 
         reference = bits[start:start+12]
-        reference = int(reference)
+        reference = int(reference, 2)
     
         char = bits[start+12:end]
         char = int(char, 2)
@@ -116,14 +135,6 @@ def lz_bits_to_table(bits: str):
         table.append(pair)
     return table
 
-
-# def text_from_tokens(table: list):
-#     current = ""
-#     for pair in table:
-#         if pair != None:
-#             current += pair[1]
-#     return current
-
 # forgive the repetition this once
 def left_pad_byte(byte: str, target_len: int):
         missing_bits = (target_len - len(byte)) % target_len
@@ -131,62 +142,19 @@ def left_pad_byte(byte: str, target_len: int):
         byte = padding+byte
         return byte
 
-def text_from_tokens(table: list, pair, current = ""):
-    if pair[0] != 0:
-        current += text_from_tokens(table, table[pair[0]], current)
-    current += pair[1]
-    return current
-
-
-    # for pair in table:
-
-    #     if pair != None:
-    #         prev_index = pair[0]
-            
-    #         if prev_index != 0:
-    #             text_from_tokens(table, prev_index)
-    #         current += pair[1]
-
-    # return current
-
-def init_decode(table: list):
+def lz_decode(table: list):
     result = ""
-    for pair in table:
-        if pair == None:
-            continue
-        if pair[0] != 0:
-            iter = pair
-            stack = []
-            while iter[0] != 0:
-                stack.append(iter[1])
-                iter = table[iter[0]]
-            stack.append(pair[1])
-            while len(stack) > 0:
-                result += stack.pop()
-            continue
-        result += pair[1]
+
+    for pair in table[1:]:
+        current = pair
+        stack =  []
+        next = ""
+        while current[0] != None:
+            stack.append(current[1])
+            current = table[current[0]]
+        while len(stack) > 0:
+            next += stack.pop()
+
+        result += next
+
     return result
-
-
-
-# def init_decode(table: list):
-#     result = ""
-#     for pair in table:
-#         if pair == None:
-#             continue
-
-#         if pair[0] != 0:
-#             iter = pair
-#             stack = []
-#             while iter[0] != 0:
-#                 print("moi")
-#                 stack.append(iter[1])
-#                 iter = table[iter[0]]
-#                 print(stack)
-#             print(iter)
-#             for _ in stack:
-#                 print("hei")
-#                 result += stack.pop()
-#         else:
-#             result += pair[1]
-#     return result

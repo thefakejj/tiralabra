@@ -41,7 +41,7 @@ class Node:
             x = x.children[char]
 
 def lz(text: str):
-    # table is a list of (index, character), where index refers to intex of correct coding in this table and character is a new character
+    # table is a list of (index, character), where index refers to index of correct coding in this table and character is a new character
     # starts with empty node
     table = [(None, "")]
     trie_root = Node(0)
@@ -52,7 +52,10 @@ def lz(text: str):
         current += char
         result = trie_root.search(trie_root, current)
         if result[0] == None:
-            trie_root.insert(trie_root, current, cur_index)
+            # when prev_index 4095 reached, no more new references will be stored.
+            # this way the reference can be stored in 12 bits
+            if cur_index < 4096:
+                trie_root.insert(trie_root, current, cur_index)
             prev_index = result[1]
             pair = (prev_index, char)
             table.append(pair)
@@ -67,9 +70,7 @@ def lz_to_binary_string(table: list):
     # without the first None "pair"
     for pair in table[1:]:
         reference = pair[0]
-        if reference >= 4096:
-            raise ValueError("More than 4096 entries. This LZ78 is limited to 4096 entries.")
-            
+    
         ref_twelve = format(reference, "b")
         ref_twelve = left_pad_byte(ref_twelve, 12)
 

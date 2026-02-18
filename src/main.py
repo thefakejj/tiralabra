@@ -15,12 +15,12 @@ def compare_file_size(og_path, bin_path):
 
 if __name__ in "__main__":
 
-    og_path = "./src/sampletexts/johndoe.txt"
+    og_path = "./src/sampletexts/hamlet.txt"
     filetext = get_text_from_file(og_path)
 
-    # funnytext = "ABRACADABRARABARABARA"
-    # lz_table = lz(funnytext)
-    # print(lz_table)
+    # # funnytext = "ABRACADABRARABARABARA"
+    # # lz_table = lz(funnytext)
+    # # print(lz_table)
 
     lz_table = lz(filetext)
     #print(lz_table)

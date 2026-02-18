@@ -6,7 +6,7 @@ import os
 
 def get_text_from_file(path):
     with open(path, encoding="ASCII") as f:
-        return f.read()
+        return f.read()[:-1]
     
 def compare_file_size(og_path, bin_path):
     og_size = os.path.getsize(og_path)
@@ -18,9 +18,9 @@ if __name__ in "__main__":
     og_path = "./src/sampletexts/hamlet.txt"
     filetext = get_text_from_file(og_path)
 
-    # # funnytext = "ABRACADABRARABARABARA"
-    # # lz_table = lz(funnytext)
-    # # print(lz_table)
+    # # # funnytext = "ABRACADABRARABARABARA"
+    # # # lz_table = lz(funnytext)
+    # # # print(lz_table)
 
     lz_table = lz(filetext)
     #print(lz_table)
@@ -46,24 +46,24 @@ if __name__ in "__main__":
     #print(lz_decoded)
     print(f"text matches: {filetext==lz_decoded}")
 
+    print()
+    filetext = get_text_from_file(og_path)
 
-    # filetext = get_text_from_file(og_path)
+    # # HUFFMAN
+    freq_table = create_freq_table(filetext)
+    tree = create_tree(freq_table)
+    huffman_codes = huffman_codes_to_characters_connection(tree) [0]
+    output_string = create_huffman_string(filetext, huffman_codes)
 
-    # # # HUFFMAN
-    # freq_table = create_freq_table(filetext)
-    # tree = create_tree(freq_table)
-    # huffman_codes = huffman_codes_to_characters_connection(tree) [0]
-    # output_string = create_huffman_string(filetext, huffman_codes)
+    tree_in_bits = tree_to_binary_string(tree)
 
-    # tree_in_bits = tree_to_binary_string(tree)
+    bin_path = "./binfile.bin"
 
-    # bin_path = "./binfile.bin"
+    huffman_string_to_binary_file(tree_in_bits, output_string, bin_path)
+    compare_file_size(og_path, bin_path)
 
-    # huffman_string_to_binary_file(tree_in_bits, output_string, bin_path)
-    # compare_file_size(og_path, bin_path)
+    bindata = get_bytes_from_binfile(bin_path)
 
-    # bindata = get_bytes_from_binfile(bin_path)
-
-    # og_text = bytes_to_text(bindata)
-    # print(f"text matches: {filetext==og_text}")
-    # # print(og_text)
+    og_text = bytes_to_text(bindata)
+    print(f"text matches: {filetext==og_text}")
+    # print(og_text)

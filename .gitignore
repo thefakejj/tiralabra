@@ -1,2 +1,6 @@
 **/__pycache__/**
 **/binfile.bin
+**/.pytest_cache/**
+**/__pycache__/**
+.coverage
+htmlcov

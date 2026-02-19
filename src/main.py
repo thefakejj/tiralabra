@@ -4,8 +4,11 @@ import os
 
 def get_text_from_file(path):
     with open(path, encoding="ASCII") as f:
-        return f.read()[:-1]
-    
+        text = f.read()
+        if text[-1] == "\n":
+            return text[:-1]
+        return text
+
 def compare_file_size(og_path, bin_path):
     og_size = os.path.getsize(og_path)
     bin_size = os.path.getsize(bin_path)
@@ -13,7 +16,7 @@ def compare_file_size(og_path, bin_path):
 
 if __name__ in "__main__":
 
-    og_path = "./src/sampletexts/hamlet.txt"
+    og_path = "./src/sampletexts/aabcbad.txt"
     filetext = get_text_from_file(og_path)
     bin_path = "./binfile.bin"
 

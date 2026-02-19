@@ -1,7 +1,5 @@
 from huffman import decode_huffman, encode_huffman
-
 from lz import decode_lz, encode_lz
-
 import os
 
 def get_text_from_file(path):

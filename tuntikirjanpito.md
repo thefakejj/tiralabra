@@ -23,3 +23,4 @@
 | 13.2  | 5    | Huffman                                                                                                                                    |
 | 14.2  | 1    | Viikkoraportti 5                                                                                                                           |
 | 16.2  | 3    | LZ78 tallentuu ja dekoodaus toimii (paitsi että se lisää newline tiedoston loppuun kirjoittaessa vaikka semmoista ei olisi alkuperäisessä) |
+| 18.2  | 3    | Rajattu referencejen määrä LZ.ssa 4096:een ja main puhdistettu. Newline bugi korjattu                                                      |

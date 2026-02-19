@@ -24,3 +24,4 @@
 | 14.2  | 1    | Viikkoraportti 5                                                                                                                           |
 | 16.2  | 3    | LZ78 tallentuu ja dekoodaus toimii (paitsi että se lisää newline tiedoston loppuun kirjoittaessa vaikka semmoista ei olisi alkuperäisessä) |
 | 18.2  | 3    | Rajattu referencejen määrä LZ.ssa 4096:een ja main puhdistettu. Newline bugi korjattu                                                      |
+| 19.2  | 3    | Päivitin projektinhallintaa, nyt on pytest sun muu. Korjasin myös oikeasti newline bugin. Kirjoitettu testi.                               |

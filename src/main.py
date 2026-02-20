@@ -12,7 +12,7 @@ def get_text_from_file(path):
 def compare_file_size(og_path, bin_path):
     og_size = os.path.getsize(og_path)
     bin_size = os.path.getsize(bin_path)
-    print(f"Original file size: {og_size}\nBinary file size: {bin_size}\nCompression ratio: {(bin_size/og_size)*100:.2f}%")
+    print(f"Original file size: {og_size} bytes\nBinary file size: {bin_size} bytes\nCompression ratio: {(bin_size/og_size)*100:.2f}%")
 
 if __name__ in "__main__":
 

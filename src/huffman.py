@@ -9,9 +9,6 @@ class Node:
         self.left = None
         self.right = None
 
-    def add_huff_code(self, code: str):
-        self.code = code
-
     # less-than operaaito, jotta heap osaa järjestellä nodet
     def __lt__(self, other):
         return self.freq < other.freq
@@ -19,7 +16,7 @@ class Node:
 def encode_huffman(filetext: str, binary_path: str):
     freq_table = create_freq_table(filetext)
     tree = create_tree(freq_table)
-    huffman_codes = huffman_codes_to_characters_connection(tree) [0]
+    huffman_codes = huffman_codes_to_characters_connection(tree)[0]
     output_string = create_huffman_string(filetext, huffman_codes)
     tree_in_bits = tree_to_binary_string(tree)
     huffman_string_to_binary_file(tree_in_bits, output_string, binary_path)
@@ -49,7 +46,6 @@ def create_tree(freq_table: dict):
     while len(prio_queue) >= 2:
         left = heapq.heappop(prio_queue)
         right = heapq.heappop(prio_queue)
-
         new_node = Node(left.freq+right.freq)
         new_node.left = left
         new_node.right = right
@@ -88,12 +84,6 @@ def get_bytes_from_binfile(filepath: str):
     with open(filepath, "rb") as binfile:
         bytes = binfile.read()
     return bytes
-
-def codelist_to_text(codelist: list, chars: dict):
-    output = ""
-    for code in codelist:
-        output+= chars[code]
-    return output
 
 def bytes_to_text(bytes: list):
     bits = ""
@@ -197,13 +187,20 @@ def left_pad_byte(byte: str):
 def bfs(root):
     visited = set()
     queue = [root]
+    output = []
     while len(queue)>0:
         current = queue[0]
+
+        #print(current.freq)
+        #if current.char:
+           #print(current.char, "char exists")
         if current not in visited and not None:
             for child in [current.left, current.right]:
                 if child != None:
+                    #print(f"{current.freq, current.char} child: {child.freq, child.char}")
                     queue.append(child)
             visited.add(current)
             queue.remove(current)
         if current.left is None and current.right is None:
-            print(current.char, current.freq)
+            output.append((current.char, current.freq))
+    return output

@@ -1,7 +1,7 @@
 class Node:
     def __init__(self, index: int):
-        self.index = index
-        self.children = dict()
+        self.index = index # current node's table index
+        self.children = dict() # children[char] = node. creates trie where routes create substrings (routes to both leaf and non-leaf nodes)
 
     def search(self, root, key: str):
         x = root
@@ -23,7 +23,8 @@ class Node:
 
 # one function that calls all necessary functions for encoding and saving
 def encode_lz(filetext: str, binary_path: str):
-    lz_table = lz(filetext)    
+    lz_table = create_table(filetext)
+    print(lz_table)
     lz_binary = lz_to_binary_string(lz_table)
     lz_binary_to_file(lz_binary, binary_path)
 
@@ -32,10 +33,10 @@ def decode_lz(binary_path: str):
     lz_bytes = lz_binary_to_bytes(binary_path)
     lz_bits = bytes_to_bits(lz_bytes)
     new_lz_table = lz_bits_to_table(lz_bits)
-    output = lz_decode(new_lz_table)
+    output = lz_decode_table(new_lz_table)
     return output
 
-def lz(text: str):
+def create_table(text: str):
     # table is a list of (index, character), where index refers to index of correct coding in this table and character is a new character
     # starts with empty node
     table = [(None, "")]
@@ -138,7 +139,7 @@ def left_pad_byte(byte: str, target_len: int):
         byte = padding+byte
         return byte
 
-def lz_decode(table: list):
+def lz_decode_table(table: list):
     result = ""
 
     for pair in table[1:]:

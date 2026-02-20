@@ -2,7 +2,7 @@ This is a bit of a placeholder guide, but here's how to use the program.
 
 Requirements: Poetry
 
-In main.py, you can choose which text file to compress by editing the og_path variable. Note that the program only supports ASCII-data. The program will save the compressed data into binfile.bin located in the project's root directory.
+In main.py, you can choose which text file to compress by editing the og_path variable. Note that the program only supports ASCII-data. The compressed data will be saved into binfile.bin located in the project's root directory. The program will print the compression ratio achieved using each algorithm.
 
 Install dependencies:
 
